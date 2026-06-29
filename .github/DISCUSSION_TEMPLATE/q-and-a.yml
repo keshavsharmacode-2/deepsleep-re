@@ -1,0 +1,27 @@
+title: "[Q] "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Ask anything about DeepSleep
+        Setup help, integration questions, model recommendations — all welcome.
+  - type: textarea
+    id: question
+    attributes:
+      label: What do you need help with?
+    validations:
+      required: true
+  - type: textarea
+    id: tried
+    attributes:
+      label: What have you tried?
+    validations:
+      required: false
+  - type: input
+    id: version
+    attributes:
+      label: DeepSleep version
+      placeholder: "pip show deepsleep-ai"
+    validations:
+      required: false

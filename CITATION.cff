@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use DeepSleep in your research or project, please cite it."
+title: "DeepSleep: Zero-cost local coding memory with idle-time dreaming and cross-project Neural Link"
+version: 0.2.3
+date-released: 2026-04-21
+url: "https://github.com/Keshavsharma-code/DeepSleep-beta"
+repository-code: "https://github.com/Keshavsharma-code/DeepSleep-beta"
+license: MIT
+keywords:
+  - local AI
+  - coding assistant
+  - LLM
+  - Ollama
+  - MCP
+  - model context protocol
+  - developer tools
+  - memory
+  - Python

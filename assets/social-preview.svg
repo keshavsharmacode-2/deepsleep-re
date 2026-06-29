@@ -1,0 +1,67 @@
+<svg width="1280" height="640" viewBox="0 0 1280 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="640" y1="0" x2="640" y2="640" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#050918"/>
+      <stop offset="0.52" stop-color="#120C1E"/>
+      <stop offset="1" stop-color="#311726"/>
+    </linearGradient>
+    <radialGradient id="glowLeft" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(266 218) rotate(66.64) scale(371.884 345.242)">
+      <stop stop-color="#7282FF" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#7282FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowRight" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1035 558) rotate(-128.442) scale(472.062 340.88)">
+      <stop stop-color="#D2648D" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#D2648D" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="silhouette" x1="299" y1="79" x2="299" y2="640" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3D4B86"/>
+      <stop offset="0.4" stop-color="#1B224F"/>
+      <stop offset="1" stop-color="#060915"/>
+    </linearGradient>
+    <linearGradient id="profileStroke" x1="477" y1="145" x2="425" y2="438" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#AEB6FF" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#7F8BF2" stop-opacity="0.12"/>
+    </linearGradient>
+    <filter id="softShadow" x="0" y="0" width="1280" height="640" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#000000" flood-opacity="0.28"/>
+    </filter>
+    <clipPath id="skullClip">
+      <path d="M218 254C218 147 303 79 409 79C514 79 596 161 596 263C596 306 583 345 560 377C539 407 527 440 527 477C527 527 535 573 551 618H173C196 580 205 540 203 497C200 445 179 410 161 374C142 336 134 294 140 249C148 190 176 140 218 106V254Z"/>
+    </clipPath>
+  </defs>
+
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <rect width="1280" height="640" fill="url(#glowLeft)"/>
+  <rect width="1280" height="640" fill="url(#glowRight)"/>
+
+  <circle cx="420" cy="250" r="202" fill="#95A2FF" opacity="0.08"/>
+
+  <path d="M97 640C130 598 150 554 156 510C164 454 146 417 128 381C108 339 100 291 107 244C116 177 146 123 193 86C245 46 314 28 388 32C467 36 539 66 590 122C639 175 663 243 662 316C661 357 651 392 633 420C609 456 596 494 595 533C593 574 603 611 623 640H97Z" fill="url(#silhouette)"/>
+  <path d="M261 639C289 589 300 545 296 501C293 462 280 431 266 406C247 372 244 329 256 288C269 243 294 207 329 180C363 155 405 145 448 151C494 157 535 180 563 214C588 246 600 285 596 323C592 357 577 385 552 406C529 425 517 445 516 470C514 511 522 559 539 639H261Z" fill="#050918" opacity="0.42"/>
+
+  <path d="M455 150C500 159 536 184 559 224C579 260 582 300 568 332C559 353 544 370 525 385C515 393 510 404 511 416C512 428 521 437 526 447C533 459 529 472 518 481C507 489 491 491 477 484C470 498 458 507 442 508C426 509 411 501 403 486" stroke="url(#profileStroke)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity="0.78"/>
+
+  <g clip-path="url(#skullClip)" opacity="0.8">
+    <path d="M196 151C230 122 282 112 337 123C386 132 425 161 458 188C490 214 524 230 557 225C587 220 613 194 633 150" stroke="#C5CBFF" stroke-width="1.4"/>
+    <path d="M186 170C216 148 257 146 301 160C350 175 387 205 426 220C459 232 489 230 516 214C548 196 572 163 591 122" stroke="#8E96F3" stroke-width="1.1"/>
+    <path d="M177 189C211 184 243 191 274 209C309 230 333 258 365 273C392 286 422 285 449 269C483 247 507 210 526 164C546 114 572 85 603 80C634 76 663 100 683 145" stroke="#F1F2FF" stroke-width="1.6"/>
+    <path d="M174 220C204 203 238 202 275 217C307 230 335 255 365 269C395 283 425 286 456 276C492 264 520 235 539 193C559 150 582 127 607 127C634 126 660 151 680 201" stroke="#A3ABFF" stroke-width="1.15"/>
+    <path d="M188 250C215 228 247 221 281 231C320 243 346 275 383 289C411 300 442 301 471 290C503 278 528 253 546 218C569 174 594 151 621 154C649 157 675 186 694 242" stroke="#DDE1FF" stroke-width="1.1"/>
+    <path d="M204 287C231 266 260 262 289 273C318 283 342 307 369 323C394 337 421 343 447 340C476 337 499 323 520 297C543 268 566 250 591 251C619 252 646 276 667 323" stroke="#838CF0" stroke-width="1"/>
+    <path d="M238 121C246 163 270 201 302 216C333 231 370 223 403 201C439 177 474 152 512 151C550 150 587 177 614 229" stroke="#F5F6FF" stroke-width="1.5"/>
+  </g>
+
+  <circle cx="420" cy="178" r="3.5" fill="#FFFFFF"/>
+  <circle cx="566" cy="190" r="2.5" fill="#E7EAFF"/>
+
+  <g fill="#EEF0FF" opacity="0.96" filter="url(#softShadow)">
+    <text x="663" y="122" font-family="Helvetica, Arial, sans-serif" font-size="56" font-weight="700">Z</text>
+    <text x="737" y="176" font-family="Helvetica, Arial, sans-serif" font-size="56" font-weight="700">Z</text>
+    <text x="748" y="214" font-family="Helvetica, Arial, sans-serif" font-size="38" font-weight="500">z</text>
+  </g>
+
+  <g filter="url(#softShadow)">
+    <text x="430" y="392" font-family="Helvetica, Arial, sans-serif" font-size="66" font-weight="700" fill="#F7F8FF">DeepSleep-beta</text>
+    <text x="432" y="437" font-family="Helvetica, Arial, sans-serif" font-size="27" font-weight="500" fill="#C7CBF8">Background coding agent for local models</text>
+  </g>
+</svg>

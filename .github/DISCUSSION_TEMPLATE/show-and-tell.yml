@@ -1,0 +1,30 @@
+title: "[Show] "
+labels: ["show-and-tell"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Share how you use DeepSleep
+        Show off your setup, workflow, or something DeepSleep helped you remember.
+  - type: textarea
+    id: setup
+    attributes:
+      label: My setup
+      description: What OS, IDE, Ollama model, and DeepSleep version are you running?
+      placeholder: "macOS · VS Code · deepseek-r1 · v0.3.0"
+    validations:
+      required: true
+  - type: textarea
+    id: workflow
+    attributes:
+      label: How I use it
+      description: What does DeepSleep do for you day-to-day?
+    validations:
+      required: true
+  - type: textarea
+    id: dream
+    attributes:
+      label: Best dream summary you got
+      description: Paste the most useful session summary DeepSleep generated for you.
+    validations:
+      required: false

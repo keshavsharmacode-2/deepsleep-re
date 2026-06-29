@@ -1,0 +1,268 @@
+#!/usr/bin/env python3
+"""Generate animated fireball mascot badge with live total downloads."""
+import json
+import urllib.request
+from pathlib import Path
+
+PKG = "deepsleep-ai"
+OUT = Path(__file__).parent.parent / "assets" / "mascot-badge.svg"
+
+
+def fetch_total() -> int:
+    url = f"https://pypistats.org/api/packages/{PKG}/overall"
+    req = urllib.request.Request(url, headers={"User-Agent": "deepsleep-badge/1.0"})
+    with urllib.request.urlopen(req, timeout=10) as r:
+        data = json.loads(r.read())
+    return sum(
+        row["downloads"]
+        for row in data["data"]
+        if row["category"] == "with_mirrors"
+    )
+
+
+def fmt(n: int) -> str:
+    return f"{n:,}"
+
+
+def font_size(s: str) -> int:
+    n = len(s)
+    if n <= 5:  return 48
+    if n <= 7:  return 42
+    return 35
+
+
+def make_svg(count_str: str) -> str:
+    fs = font_size(count_str)
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 465" width="400" height="465">
+  <defs>
+    <!-- Ball radial gradient: bright center → deep navy edge -->
+    <radialGradient id="bG" cx="38%" cy="30%" r="65%">
+      <stop offset="0%"   stop-color="#C2E2FF"/>
+      <stop offset="42%"  stop-color="#3A8FE0"/>
+      <stop offset="100%" stop-color="#0A2F6A"/>
+    </radialGradient>
+    <!-- Flame gradient: blue base → icy tip -->
+    <linearGradient id="fG" x1=".5" y1="1" x2=".5" y2="0">
+      <stop offset="0%"   stop-color="#1258B8"/>
+      <stop offset="55%"  stop-color="#6ABEF5"/>
+      <stop offset="100%" stop-color="#C8E8FF" stop-opacity=".15"/>
+    </linearGradient>
+    <!-- Banner parchment gradient -->
+    <linearGradient id="bnG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#F5EDCE"/>
+      <stop offset="100%" stop-color="#D9C98A"/>
+    </linearGradient>
+    <!-- Eye orange glow -->
+    <radialGradient id="eG" cx="50%" cy="40%" r="60%">
+      <stop offset="0%"   stop-color="#FFCC00"/>
+      <stop offset="60%"  stop-color="#FF7000"/>
+      <stop offset="100%" stop-color="#CC3300"/>
+    </radialGradient>
+    <style>
+      /* Flame flicker — each layer on different rhythm */
+      .f1{{animation:flk1 .78s ease-in-out infinite alternate;transform-origin:200px 210px}}
+      .f2{{animation:flk2 1.05s ease-in-out infinite alternate;transform-origin:200px 210px}}
+      .f3{{animation:flk3 .88s ease-in-out infinite alternate;transform-origin:200px 210px}}
+      @keyframes flk1{{from{{transform:scaleY(1) skewX(0deg)}}     to{{transform:scaleY(.87) skewX(2.5deg)}}}}
+      @keyframes flk2{{from{{transform:scaleY(.9) skewX(-3deg)}}   to{{transform:scaleY(1.06) skewX(1.5deg)}}}}
+      @keyframes flk3{{from{{transform:scaleY(1.03) skewX(1deg)}} to{{transform:scaleY(.83) skewX(-2deg)}}}}
+      /* Evil eye pulse */
+      .ey{{animation:eyeP 2.1s ease-in-out infinite}}
+      @keyframes eyeP{{0%,100%{{opacity:1}}50%{{opacity:.6}}}}
+      /* Slot lever pull */
+      .lv{{animation:pull 3.6s ease-in-out infinite;transform-origin:341px 178px}}
+      @keyframes pull{{0%,65%,100%{{transform:rotate(0deg)}}32%{{transform:rotate(30deg)}}}}
+      /* Sparkle twinkle */
+      .s1{{animation:twk 1.4s ease-in-out infinite}}
+      .s2{{animation:twk 1.75s ease-in-out infinite .45s}}
+      .s3{{animation:twk 1.2s ease-in-out infinite .8s}}
+      .s4{{animation:twk 2.0s ease-in-out infinite .2s}}
+      @keyframes twk{{0%,100%{{opacity:1;transform:scale(1)}}50%{{opacity:.15;transform:scale(.45)}}}}
+    </style>
+  </defs>
+
+  <!-- White card background -->
+  <rect x="0" y="0" width="400" height="465" rx="16" fill="white"/>
+
+  <!-- ══════════════ FLAMES (behind ball) ══════════════ -->
+  <!-- Center tall -->
+  <path class="f1"
+    d="M166,212 C160,162 148,108 167,52 C175,26 191,6 200,3
+       C209,6 225,26 233,52 C252,108 240,162 234,212 Z"
+    fill="url(#fG)" stroke="#081C50" stroke-width="2.5"/>
+  <!-- Left -->
+  <path class="f2"
+    d="M136,216 C118,178 110,140 124,96 C131,74 141,58 150,47
+       C155,69 160,95 158,130 C156,165 148,190 141,216 Z"
+    fill="url(#fG)" stroke="#081C50" stroke-width="2"/>
+  <!-- Right -->
+  <path class="f3"
+    d="M264,216 C282,178 290,140 276,96 C269,74 259,58 250,47
+       C245,69 240,95 242,130 C244,165 252,190 259,216 Z"
+    fill="url(#fG)" stroke="#081C50" stroke-width="2"/>
+  <!-- Far left -->
+  <path class="f1"
+    d="M110,222 C93,193 86,164 98,130 C104,113 113,100 120,92
+       C125,111 128,133 127,156 C126,178 118,201 113,222 Z"
+    fill="url(#fG)" opacity=".78"/>
+  <!-- Far right -->
+  <path class="f2"
+    d="M290,222 C307,193 314,164 302,130 C296,113 287,100 280,92
+       C275,111 272,133 273,156 C274,178 282,201 287,222 Z"
+    fill="url(#fG)" opacity=".78"/>
+  <!-- Tiny outer left -->
+  <path class="f3"
+    d="M90,228 C75,208 69,187 79,162 C83,151 90,143 95,137
+       C99,153 101,170 100,186 C99,203 93,217 91,228 Z"
+    fill="#7ECFFF" opacity=".5"/>
+  <!-- Tiny outer right -->
+  <path class="f1"
+    d="M310,228 C325,208 331,187 321,162 C317,151 310,143 305,137
+       C301,153 299,170 300,186 C301,203 307,217 309,228 Z"
+    fill="#7ECFFF" opacity=".5"/>
+
+  <!-- ══════════════ BALL BODY ══════════════ -->
+  <circle cx="200" cy="218" r="92" fill="url(#bG)" stroke="#060F2E" stroke-width="4"/>
+  <!-- Specular highlight -->
+  <ellipse cx="166" cy="180" rx="30" ry="20" fill="white" opacity=".2"/>
+  <!-- Dark 4-pointed star sparkle on ball -->
+  <path d="M174,198 L179,187 L184,198 L195,203 L184,208 L179,219 L174,208 L163,203 Z"
+        fill="#060F2E"/>
+
+  <!-- ══════════════ FACE ══════════════ -->
+  <!-- Angry left brow -->
+  <path d="M148,208 Q165,200 188,207" stroke="#060F2E" stroke-width="5"
+        fill="none" stroke-linecap="round"/>
+  <!-- Angry right brow -->
+  <path d="M252,208 Q235,200 212,207" stroke="#060F2E" stroke-width="5"
+        fill="none" stroke-linecap="round"/>
+
+  <!-- Left eye -->
+  <ellipse class="ey" cx="170" cy="226" rx="21" ry="17" fill="url(#eG)" stroke="#060F2E" stroke-width="1.5"/>
+  <ellipse cx="170" cy="227" rx="11" ry="11" fill="#A81800"/>
+  <ellipse cx="166" cy="222" rx="4.5" ry="3.5" fill="#FFEE66" opacity=".65"/>
+
+  <!-- Right eye -->
+  <ellipse class="ey" cx="230" cy="226" rx="21" ry="17" fill="url(#eG)" stroke="#060F2E" stroke-width="1.5"/>
+  <ellipse cx="230" cy="227" rx="11" ry="11" fill="#A81800"/>
+  <ellipse cx="226" cy="222" rx="4.5" ry="3.5" fill="#FFEE66" opacity=".65"/>
+
+  <!-- Grin (dark mouth area) -->
+  <path d="M152,253 Q168,267 184,273 Q200,278 216,273 Q232,267 248,253
+           Q232,290 200,292 Q168,290 152,253 Z"
+        fill="#060F2E"/>
+  <!-- White teeth (diamond points) -->
+  <polygon points="161,254 167,272 173,254" fill="white"/>
+  <polygon points="173,260 179,276 185,260" fill="white"/>
+  <polygon points="185,264 191,280 197,264" fill="white"/>
+  <polygon points="197,265 203,281 209,265" fill="white"/>
+  <polygon points="209,264 215,280 221,264" fill="white"/>
+  <polygon points="221,260 227,276 233,260" fill="white"/>
+  <polygon points="233,254 239,272 245,254" fill="white"/>
+
+  <!-- ══════════════ SLOT MACHINE ══════════════ -->
+  <g transform="translate(269,174)">
+    <!-- Machine body -->
+    <rect x="0" y="0" width="72" height="52" rx="5" fill="white"
+          stroke="#7A5500" stroke-width="3"/>
+    <rect x="0" y="0" width="72" height="52" rx="5" fill="none"
+          stroke="#FFD700" stroke-width="1.5"/>
+    <rect x="3" y="3" width="66" height="46" rx="3" fill="#FFFEF5"/>
+    <line x1="24" y1="3" x2="24" y2="49" stroke="#7A5500" stroke-width="2"/>
+    <line x1="48" y1="3" x2="48" y2="49" stroke="#7A5500" stroke-width="2"/>
+    <text x="12" y="38" text-anchor="middle"
+          font-family="Georgia,serif" font-size="26" font-weight="bold" fill="#CC0000">7</text>
+    <text x="36" y="38" text-anchor="middle"
+          font-family="Georgia,serif" font-size="26" font-weight="bold" fill="#CC0000">7</text>
+    <text x="60" y="38" text-anchor="middle"
+          font-family="Georgia,serif" font-size="26" font-weight="bold" fill="#CC0000">7</text>
+  </g>
+  <!-- Lever arm (animated pull) -->
+  <g class="lv">
+    <line x1="341" y1="178" x2="357" y2="218" stroke="#999" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="341" cy="176" r="9" fill="#CC0000" stroke="#880000" stroke-width="2"/>
+    <circle cx="338" cy="173" r="3" fill="#FF9999" opacity=".6"/>
+    <rect x="350" y="215" width="11" height="7" rx="2" fill="#888"/>
+  </g>
+
+  <!-- ══════════════ BANNER RIBBON ══════════════ -->
+  <!-- Left fold -->
+  <path d="M33,322 L55,312 L55,337 L33,347 Z"
+        fill="#C5B270" stroke="#8B7040" stroke-width="1.5"/>
+  <!-- Right fold -->
+  <path d="M367,322 L345,312 L345,337 L367,347 Z"
+        fill="#C5B270" stroke="#8B7040" stroke-width="1.5"/>
+  <!-- Banner body -->
+  <path d="M50,310 L350,310 Q368,324 350,338 L50,338 Q32,324 50,310 Z"
+        fill="url(#bnG)" stroke="#8B7040" stroke-width="2.5"/>
+  <!-- Inner shadow line -->
+  <path d="M55,334 L345,334" stroke="#8B7040" stroke-width=".8" opacity=".4"/>
+  <!-- Text -->
+  <text x="200" y="329" text-anchor="middle"
+        font-family="'Arial Black',Arial,sans-serif"
+        font-size="17" font-weight="900" fill="#140F00" letter-spacing="3">TOTAL DOWNLOADS</text>
+
+  <!-- ══════════════ NUMBER PANEL ══════════════ -->
+  <!-- Jagged dark panel -->
+  <path d="M18,352 L382,352
+           L388,360 L393,354 L398,364 L398,438
+           L0,438 L0,364 L2,354 L7,360 L12,352 Z"
+        fill="#070E2E" stroke="#1A3A88" stroke-width="2"/>
+  <!-- Inner subtle border -->
+  <rect x="22" y="357" width="356" height="76" rx="3"
+        fill="none" stroke="#2050BB" stroke-width=".8" opacity=".5"/>
+  <!-- Download count number -->
+  <text x="200" y="415" text-anchor="middle"
+        font-family="'Arial Black',Impact,Arial,sans-serif"
+        font-size="{fs}" font-weight="900" fill="#EDE4C5" letter-spacing="2">{count_str}</text>
+  <!-- Gold 4-pointed stars flanking number -->
+  <path d="M44,393 L49,379 L54,393 L40,385 L58,385 Z" fill="#FFD700"/>
+  <path d="M356,393 L361,379 L366,393 L352,385 L370,385 Z" fill="#FFD700"/>
+
+  <!-- ══════════════ SCATTERED SPARKLES ══════════════ -->
+  <!-- Orange 4-point star — top left -->
+  <g class="s1" transform="translate(58,90)">
+    <path d="M0,-15 L3.8,-3.8 L15,0 L3.8,3.8 L0,15 L-3.8,3.8 L-15,0 L-3.8,-3.8 Z" fill="#FFA500"/>
+  </g>
+  <!-- Blue star — top right -->
+  <g class="s2" transform="translate(338,68)">
+    <path d="M0,-12 L3,-3 L12,0 L3,3 L0,12 L-3,3 L-12,0 L-3,-3 Z" fill="#5AB5FF"/>
+  </g>
+  <!-- Blue star — mid right -->
+  <g class="s3" transform="translate(375,158)">
+    <path d="M0,-9 L2.3,-2.3 L9,0 L2.3,2.3 L0,9 L-2.3,2.3 L-9,0 L-2.3,-2.3 Z" fill="#5AB5FF"/>
+  </g>
+  <!-- Small black star — top -->
+  <g class="s4" transform="translate(86,50)">
+    <path d="M0,-8 L2,-2 L8,0 L2,2 L0,8 L-2,2 L-8,0 L-2,-2 Z" fill="#111"/>
+  </g>
+  <!-- Small black star — left side -->
+  <g class="s1" transform="translate(40,195)">
+    <path d="M0,-7 L1.8,-1.8 L7,0 L1.8,1.8 L0,7 L-1.8,1.8 L-7,0 L-1.8,-1.8 Z" fill="#111"/>
+  </g>
+  <!-- Orange dot — upper right -->
+  <circle class="s2" cx="300" cy="100" r="5.5" fill="#FF8C00"/>
+  <!-- Blue star — lower right -->
+  <g class="s3" transform="translate(367,278)">
+    <path d="M0,-8 L2,-2 L8,0 L2,2 L0,8 L-2,2 L-8,0 L-2,-2 Z" fill="#5AB5FF"/>
+  </g>
+  <!-- Tiny black star — top right area -->
+  <g class="s4" transform="translate(360,42)">
+    <path d="M0,-6 L1.5,-1.5 L6,0 L1.5,1.5 L0,6 L-1.5,1.5 L-6,0 L-1.5,-1.5 Z" fill="#111"/>
+  </g>
+</svg>'''
+
+
+if __name__ == "__main__":
+    try:
+        total = fetch_total()
+    except Exception as e:
+        print(f"fetch failed: {e} — using cached")
+        total = 2030  # fallback
+
+    count_str = fmt(total)
+    print(f"Total downloads: {total}  →  {count_str}")
+
+    svg = make_svg(count_str)
+    OUT.write_text(svg, encoding="utf-8")
+    print(f"Written: {OUT}")
