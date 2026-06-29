@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>DeepSleep Mascot</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;background:#0d1117;font-family:Arial,sans-serif;overflow:hidden}
+
+/* ── DEMO CONTENT ── */
+.demo{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#ccc;pointer-events:none;user-select:none}
+.demo h1{font-size:2rem;color:#fff;margin-bottom:12px}
+.demo p{font-size:1rem;color:#888}
+
+/* ── STAGE ── */
+#stage{position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden}
+
+/* ── ROBOT WRAP ── */
+#wrap{
+  position:absolute;
+  bottom:-320px;
+  left:60%;
+  width:160px;
+  height:270px;
+  transform-origin:50% 100%;
+  transition:left 1.6s cubic-bezier(.2,.8,.2,1), bottom 1.6s cubic-bezier(.2,.8,.2,1);
+}
+#wrap.flip{transform:scaleX(-1)}
+
+/* ── ROBOT IMG ── */
+#robot{
+  position:absolute;
+  bottom:0;left:0;
+  width:160px;
+  height:270px;
+  object-fit:contain;
+  object-position:bottom center;
+  transform-origin:50% 100%;
+  animation:idle 1.4s ease-in-out infinite;
+  image-rendering:auto;
+  filter:drop-shadow(0 8px 16px rgba(0,0,0,.5));
+}
+#robot.walking{ animation:walk 0.5s ease-in-out infinite }
+#robot.waving{  animation:wave 0.7s ease-in-out infinite }
+
+@keyframes idle{
+  0%,100%{transform:translateY(0) rotate(-1deg)}
+  50%{transform:translateY(-6px) rotate(1deg)}
+}
+@keyframes walk{
+  0%,100%{transform:translateY(4px) rotate(-2.5deg) scaleX(1)}
+  25%{transform:translateY(-8px) rotate(0deg) scaleX(1.02)}
+  50%{transform:translateY(4px) rotate(2.5deg) scaleX(1)}
+  75%{transform:translateY(-8px) rotate(0deg) scaleX(.98)}
+}
+@keyframes wave{
+  0%,100%{transform:translateY(-2px) rotate(-3deg)}
+  25%{transform:translateY(-10px) rotate(4deg)}
+  50%{transform:translateY(-2px) rotate(-4deg)}
+  75%{transform:translateY(-10px) rotate(3deg)}
+}
+
+/* ── SPEECH BUBBLE ── */
+#speech{
+  position:absolute;
+  bottom:255px;
+  left:50%;
+  transform:translateX(-50%) scale(0.6);
+  transform-origin:50% 100%;
+  background:#fff;
+  border:3px solid #111;
+  border-radius:18px;
+  padding:8px 18px;
+  font-size:20px;
+  font-weight:900;
+  color:#111;
+  white-space:nowrap;
+  box-shadow:4px 4px 0 #111;
+  opacity:0;
+  transition:opacity .2s ease, transform .2s ease;
+  pointer-events:none;
+  z-index:10;
+}
+#speech.show{
+  opacity:1;
+  transform:translateX(-50%) scale(1);
+}
+/* bubble tail */
+#speech::after{
+  content:"";
+  position:absolute;
+  bottom:-13px;
+  left:50%;
+  transform:translateX(-50%) rotate(45deg);
+  width:16px;height:16px;
+  background:#fff;
+  border-right:3px solid #111;
+  border-bottom:3px solid #111;
+}
+/* flip bubble back when robot is flipped */
+#wrap.flip #speech{
+  transform:translateX(-50%) scaleX(-1) scale(0.6);
+}
+#wrap.flip #speech.show{
+  transform:translateX(-50%) scaleX(-1) scale(1);
+}
+</style>
+</head>
+<body>
+
+<div class="demo">
+  <h1>🧠 DeepSleep</h1>
+  <p>Local AI memory for developers</p>
+</div>
+
+<div id="stage">
+  <div id="wrap">
+    <div id="speech">hii 👋</div>
+    <img id="robot" src="robot.png" alt="mascot"/>
+  </div>
+</div>
+
+<script>
+const wrap    = document.getElementById('wrap');
+const robot   = document.getElementById('robot');
+const speech  = document.getElementById('speech');
+
+const S = { x: 60, bottom: -320, facing: 'right', busy: false, roaming: false };
+
+const W   = () => window.innerWidth;
+const wait = ms => new Promise(r => setTimeout(r, ms));
+
+function pos(x, b){
+  S.x = x; S.bottom = b;
+  wrap.style.left   = x + 'px';
+  wrap.style.bottom = b + 'px';
+}
+
+function face(dir){
+  S.facing = dir;
+  dir === 'left' ? wrap.classList.add('flip') : wrap.classList.remove('flip');
+}
+
+function setState(state){
+  robot.classList.remove('walking','waving');
+  if(state) robot.classList.add(state);
+}
+
+async function say(txt, ms=1800){
+  speech.textContent = txt;
+  speech.classList.add('show');
+  await wait(ms);
+  speech.classList.remove('show');
+  await wait(200);
+}
+
+async function walkTo(x, b=30){
+  face(x < S.x ? 'left' : 'right');
+  setState('walking');
+  const dist = Math.abs(x - S.x);
+  pos(x, b);
+  await wait(Math.max(900, dist * 3.5));
+  setState(null);
+}
+
+function rand(a,b){ return Math.floor(Math.random()*(b-a+1))+a; }
+
+const lines = ['hii 👋','focus!','i see you','lock in 🔒','code more','no slacking','👀','sup coder'];
+
+async function intro(){
+  S.busy = true;
+  // enter from off-screen right side
+  pos(W() - 220, -320);
+  face('left');
+  await wait(400);
+
+  setState('walking');
+  // walk up into view
+  wrap.style.transition = 'left 1.6s cubic-bezier(.2,.8,.2,1), bottom 1.6s cubic-bezier(.2,.8,.2,1)';
+  pos(W() - 220, 20);
+  await wait(1700);
+  setState(null);
+
+  await wait(300);
+  // say hii and wave simultaneously
+  setState('waving');
+  await say('hii 👋', 2000);
+  setState(null);
+
+  await wait(500);
+  await say('i watch your code 👁', 1600);
+  await wait(400);
+
+  S.busy = false;
+  S.roaming = true;
+  roam();
+}
+
+async function roam(){
+  while(S.roaming){
+    if(S.busy){ await wait(400); continue; }
+    S.busy = true;
+
+    const r = Math.random();
+
+    if(r < 0.45){
+      // walk to random position
+      const maxX = W() - 200;
+      const tx   = rand(10, Math.max(20, maxX));
+      const tb   = rand(10, 60);
+      await walkTo(tx, tb);
+    } else if(r < 0.62){
+      setState('waving');
+      await wait(rand(900,1600));
+      setState(null);
+    } else if(r < 0.80){
+      await say(lines[rand(0, lines.length-1)], rand(1200,2000));
+    } else {
+      // idle pause
+      await wait(rand(800,2000));
+    }
+
+    S.busy = false;
+    await wait(rand(500,1400));
+  }
+}
+
+// cursor look
+document.addEventListener('mousemove', e => {
+  if(S.busy) return;
+  const center = S.x + 80;
+  face(e.clientX < center ? 'left' : 'right');
+});
+
+window.addEventListener('resize', () => {
+  const maxX = W() - 200;
+  if(S.x > maxX) pos(maxX, S.bottom);
+});
+
+window.addEventListener('load', () => { setTimeout(intro, 600); });
+</script>
+</body>
+</html>

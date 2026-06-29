@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="224" height="52" viewBox="0 0 224 52">
+  <defs>
+    <style>
+      .rd{font-family:'Courier New',Courier,monospace;font-size:21px;font-weight:bold;fill:#fff;}
+      .lbl{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:10px;font-weight:700;fill:#f1948a;letter-spacing:1.4px;text-transform:uppercase;}
+      .rl0{animation:spin0 1.5s cubic-bezier(.17,.67,.28,1) 0.00s both;}@keyframes spin0{0%{transform:translateY(0)}100%{transform:translateY(-798px)}}.rl1{animation:spin1 1.5s cubic-bezier(.17,.67,.28,1) 0.18s both;}@keyframes spin1{0%{transform:translateY(0)}100%{transform:translateY(-760px)}}.rl2{animation:spin2 1.5s cubic-bezier(.17,.67,.28,1) 0.36s both;}@keyframes spin2{0%{transform:translateY(0)}100%{transform:translateY(-950px)}}.rl3{animation:spin3 1.5s cubic-bezier(.17,.67,.28,1) 0.54s both;}@keyframes spin3{0%{transform:translateY(0)}100%{transform:translateY(-836px)}}
+    </style>
+
+  </defs>
+
+  <!-- red background -->
+  <rect width="224" height="52" rx="9" fill="#c0392b"/>
+  <!-- darker number panel -->
+  <rect x="118" width="106" height="52" rx="7" fill="#922b21"/>
+
+  <!-- label -->
+  <text x="12" y="21" class="lbl">total</text>
+  <text x="12" y="36" class="lbl">downloads</text>
+
+  <!-- clip paths -->
+  <clipPath id="c0"><rect x="124" y="7" width="22" height="38"/></clipPath><clipPath id="c1"><rect x="146" y="7" width="22" height="38"/></clipPath><clipPath id="c2"><rect x="168" y="7" width="22" height="38"/></clipPath><clipPath id="c3"><rect x="190" y="7" width="22" height="38"/></clipPath>
+
+  <!-- reels + static chars -->
+  <g clip-path="url(#c0)"><g class="rl0" transform="translate(0,7)"><text x="135" y="29" text-anchor="middle" class="rd">0</text>
+<text x="135" y="67" text-anchor="middle" class="rd">1</text>
+<text x="135" y="105" text-anchor="middle" class="rd">2</text>
+<text x="135" y="143" text-anchor="middle" class="rd">3</text>
+<text x="135" y="181" text-anchor="middle" class="rd">4</text>
+<text x="135" y="219" text-anchor="middle" class="rd">5</text>
+<text x="135" y="257" text-anchor="middle" class="rd">6</text>
+<text x="135" y="295" text-anchor="middle" class="rd">7</text>
+<text x="135" y="333" text-anchor="middle" class="rd">8</text>
+<text x="135" y="371" text-anchor="middle" class="rd">9</text>
+<text x="135" y="409" text-anchor="middle" class="rd">0</text>
+<text x="135" y="447" text-anchor="middle" class="rd">1</text>
+<text x="135" y="485" text-anchor="middle" class="rd">2</text>
+<text x="135" y="523" text-anchor="middle" class="rd">3</text>
+<text x="135" y="561" text-anchor="middle" class="rd">4</text>
+<text x="135" y="599" text-anchor="middle" class="rd">5</text>
+<text x="135" y="637" text-anchor="middle" class="rd">6</text>
+<text x="135" y="675" text-anchor="middle" class="rd">7</text>
+<text x="135" y="713" text-anchor="middle" class="rd">8</text>
+<text x="135" y="751" text-anchor="middle" class="rd">9</text>
+<text x="135" y="789" text-anchor="middle" class="rd">0</text>
+<text x="135" y="827" text-anchor="middle" class="rd">1</text>
+</g></g><g clip-path="url(#c1)"><g class="rl1" transform="translate(0,7)"><text x="157" y="29" text-anchor="middle" class="rd">0</text>
+<text x="157" y="67" text-anchor="middle" class="rd">1</text>
+<text x="157" y="105" text-anchor="middle" class="rd">2</text>
+<text x="157" y="143" text-anchor="middle" class="rd">3</text>
+<text x="157" y="181" text-anchor="middle" class="rd">4</text>
+<text x="157" y="219" text-anchor="middle" class="rd">5</text>
+<text x="157" y="257" text-anchor="middle" class="rd">6</text>
+<text x="157" y="295" text-anchor="middle" class="rd">7</text>
+<text x="157" y="333" text-anchor="middle" class="rd">8</text>
+<text x="157" y="371" text-anchor="middle" class="rd">9</text>
+<text x="157" y="409" text-anchor="middle" class="rd">0</text>
+<text x="157" y="447" text-anchor="middle" class="rd">1</text>
+<text x="157" y="485" text-anchor="middle" class="rd">2</text>
+<text x="157" y="523" text-anchor="middle" class="rd">3</text>
+<text x="157" y="561" text-anchor="middle" class="rd">4</text>
+<text x="157" y="599" text-anchor="middle" class="rd">5</text>
+<text x="157" y="637" text-anchor="middle" class="rd">6</text>
+<text x="157" y="675" text-anchor="middle" class="rd">7</text>
+<text x="157" y="713" text-anchor="middle" class="rd">8</text>
+<text x="157" y="751" text-anchor="middle" class="rd">9</text>
+<text x="157" y="789" text-anchor="middle" class="rd">0</text>
+</g></g><g clip-path="url(#c2)"><g class="rl2" transform="translate(0,7)"><text x="179" y="29" text-anchor="middle" class="rd">0</text>
+<text x="179" y="67" text-anchor="middle" class="rd">1</text>
+<text x="179" y="105" text-anchor="middle" class="rd">2</text>
+<text x="179" y="143" text-anchor="middle" class="rd">3</text>
+<text x="179" y="181" text-anchor="middle" class="rd">4</text>
+<text x="179" y="219" text-anchor="middle" class="rd">5</text>
+<text x="179" y="257" text-anchor="middle" class="rd">6</text>
+<text x="179" y="295" text-anchor="middle" class="rd">7</text>
+<text x="179" y="333" text-anchor="middle" class="rd">8</text>
+<text x="179" y="371" text-anchor="middle" class="rd">9</text>
+<text x="179" y="409" text-anchor="middle" class="rd">0</text>
+<text x="179" y="447" text-anchor="middle" class="rd">1</text>
+<text x="179" y="485" text-anchor="middle" class="rd">2</text>
+<text x="179" y="523" text-anchor="middle" class="rd">3</text>
+<text x="179" y="561" text-anchor="middle" class="rd">4</text>
+<text x="179" y="599" text-anchor="middle" class="rd">5</text>
+<text x="179" y="637" text-anchor="middle" class="rd">6</text>
+<text x="179" y="675" text-anchor="middle" class="rd">7</text>
+<text x="179" y="713" text-anchor="middle" class="rd">8</text>
+<text x="179" y="751" text-anchor="middle" class="rd">9</text>
+<text x="179" y="789" text-anchor="middle" class="rd">0</text>
+<text x="179" y="827" text-anchor="middle" class="rd">1</text>
+<text x="179" y="865" text-anchor="middle" class="rd">2</text>
+<text x="179" y="903" text-anchor="middle" class="rd">3</text>
+<text x="179" y="941" text-anchor="middle" class="rd">4</text>
+<text x="179" y="979" text-anchor="middle" class="rd">5</text>
+</g></g><g clip-path="url(#c3)"><g class="rl3" transform="translate(0,7)"><text x="201" y="29" text-anchor="middle" class="rd">0</text>
+<text x="201" y="67" text-anchor="middle" class="rd">1</text>
+<text x="201" y="105" text-anchor="middle" class="rd">2</text>
+<text x="201" y="143" text-anchor="middle" class="rd">3</text>
+<text x="201" y="181" text-anchor="middle" class="rd">4</text>
+<text x="201" y="219" text-anchor="middle" class="rd">5</text>
+<text x="201" y="257" text-anchor="middle" class="rd">6</text>
+<text x="201" y="295" text-anchor="middle" class="rd">7</text>
+<text x="201" y="333" text-anchor="middle" class="rd">8</text>
+<text x="201" y="371" text-anchor="middle" class="rd">9</text>
+<text x="201" y="409" text-anchor="middle" class="rd">0</text>
+<text x="201" y="447" text-anchor="middle" class="rd">1</text>
+<text x="201" y="485" text-anchor="middle" class="rd">2</text>
+<text x="201" y="523" text-anchor="middle" class="rd">3</text>
+<text x="201" y="561" text-anchor="middle" class="rd">4</text>
+<text x="201" y="599" text-anchor="middle" class="rd">5</text>
+<text x="201" y="637" text-anchor="middle" class="rd">6</text>
+<text x="201" y="675" text-anchor="middle" class="rd">7</text>
+<text x="201" y="713" text-anchor="middle" class="rd">8</text>
+<text x="201" y="751" text-anchor="middle" class="rd">9</text>
+<text x="201" y="789" text-anchor="middle" class="rd">0</text>
+<text x="201" y="827" text-anchor="middle" class="rd">1</text>
+<text x="201" y="865" text-anchor="middle" class="rd">2</text>
+</g></g>
+</svg>

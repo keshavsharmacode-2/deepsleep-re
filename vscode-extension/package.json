@@ -1,0 +1,89 @@
+{
+  "name": "deepsleep-memory",
+  "displayName": "DeepSleep — Memory Sidebar",
+  "description": "Live session timeline, file heatmaps, and one-click session restore powered by DeepSleep AI",
+  "version": "0.1.0",
+  "publisher": "Keshavsharma-code",
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Other"],
+  "keywords": ["memory", "session", "productivity", "ai", "deepsleep"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "deepsleep",
+          "title": "DeepSleep",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "deepsleep": [
+        {
+          "id": "deepsleep.sidebar",
+          "name": "Memory",
+          "type": "webview"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "deepsleep.resumeSession",
+        "title": "DeepSleep: Resume Session",
+        "icon": "$(debug-start)"
+      },
+      {
+        "command": "deepsleep.refreshSidebar",
+        "title": "DeepSleep: Refresh",
+        "icon": "$(refresh)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "deepsleep.refreshSidebar",
+          "when": "view == deepsleep.sidebar",
+          "group": "navigation"
+        },
+        {
+          "command": "deepsleep.resumeSession",
+          "when": "view == deepsleep.sidebar",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "DeepSleep",
+      "properties": {
+        "deepsleep.globalDataDir": {
+          "type": "string",
+          "default": "",
+          "description": "Path to global ~/.deepsleep dir (leave empty for auto-detect)"
+        },
+        "deepsleep.contextCardOnReopen": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show context card when reopening a file after a break"
+        },
+        "deepsleep.contextCardBreakMinutes": {
+          "type": "number",
+          "default": 60,
+          "description": "Minutes of inactivity before a file open is considered a 'resumption'"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p tsconfig.json",
+    "watch": "tsc -watch -p tsconfig.json",
+    "vscode:prepublish": "npm run compile",
+    "package": "npx @vscode/vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0"
+  }
+}
