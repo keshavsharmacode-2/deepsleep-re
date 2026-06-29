@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "deepsleep-ai"
 version = "0.2.3"
-description = "Zero-cost background coding agent with layered memory, idle-time dreaming, MCP server, and Ollama support."
+description = "🧠 DeepSleep: The open-source local AI memory for developers. A zero-cost coding agent with idle-time dreaming, MCP server support, and Neural Link cross-project search. Powered by Ollama & DeepSeek."
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
