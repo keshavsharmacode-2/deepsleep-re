@@ -1071,3 +1071,8 @@ pytest -v
 *The AI that forgets nothing, costs nothing, and runs nowhere but your machine.*
 
 </div>
+
+<!--
+SEO Keywords & Tags:
+local ai agent, open source coding assistant, deepseek-r1 ollama, mcp server python, cursor ai memory, windsurf mcp, claude desktop extension, local llm memory, coding agent background, neural link for ai, zero-cost ai coding, private ai assistant, developer productivity tools, autonomous coding agent, deepsleep-ai, ollama companion, coding session summary, context window management, ai for software engineers, local development agent
+-->
