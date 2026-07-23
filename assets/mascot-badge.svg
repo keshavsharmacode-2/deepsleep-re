@@ -179,7 +179,7 @@
   <!-- Download count number -->
   <text x="200" y="415" text-anchor="middle"
         font-family="'Arial Black',Impact,Arial,sans-serif"
-        font-size="48" font-weight="900" fill="#EDE4C5" letter-spacing="2">3,321</text>
+        font-size="48" font-weight="900" fill="#EDE4C5" letter-spacing="2">3,323</text>
   <!-- Gold 4-pointed stars flanking number -->
   <path d="M44,393 L49,379 L54,393 L40,385 L58,385 Z" fill="#FFD700"/>
   <path d="M356,393 L361,379 L366,393 L352,385 L370,385 Z" fill="#FFD700"/>
